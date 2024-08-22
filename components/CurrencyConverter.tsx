@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +22,7 @@ import {
 
 export default function CurrencyConverter() {
     const [baseCurrency, setBaseCurrency] = useState("")
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount] = useState("")
     const [targetCurrency, setTargetCurrency] = useState("")
     const [convertedAmount, setConvertedAmount] = useState("")
   return (
@@ -34,11 +35,9 @@ export default function CurrencyConverter() {
         <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-2">
           <Label htmlFor="base-currency">Base Currency</Label>
 
-          <Select value={baseCurrency}
-          onValueChange={(currency)=>{
-            setBaseCurrency=(currency)
-          }}
-          >
+          <Select value={baseCurrency} onValueChange={(currency)=>{
+            setBaseCurrency(currency);
+          }}>
             <SelectTrigger>
               <SelectValue placeholder="Select currency" />
             </SelectTrigger>
@@ -52,11 +51,20 @@ export default function CurrencyConverter() {
         </div>
         <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-2">
           <Label htmlFor="amount">Amount</Label>
-          <Input id="amount" type="number" placeholder="Enter amount" />
+          <Input id="amount" type="number" placeholder="Enter amount" 
+          value={amount}
+          onChange={
+            (e)=>{
+              setAmount(e.target.value);
+            }
+          } />
+
         </div>
         <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-2">
           <Label htmlFor="target-currency">Target Currency</Label>
-          <Select id="target-currency">
+          <Select value={targetCurrency} onValueChange={(currency)=>{
+              setTargetCurrency(currency);
+          }}>
             <SelectTrigger>
               <SelectValue placeholder="Select currency" />
             </SelectTrigger>
